@@ -3,7 +3,6 @@ module PMD
   class Counter
 
     def initialize
-
       @value = 0
       if File.exists? Config.counter_path
         File.open Config.counter_path, "r" do |file|
