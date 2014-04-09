@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module PMD
 
   class Stop
@@ -8,8 +10,7 @@ module PMD
 
     def execute!
 
-      # create a stop file
-      puts "HELLO FROM STOP"
+      FileUtils.touch Config.stop_path
 
     end
 

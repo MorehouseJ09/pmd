@@ -8,6 +8,8 @@ module PMD
 
     def execute!
 
+      FileUtils.touch Config.pause_path
+
     end
 
   end

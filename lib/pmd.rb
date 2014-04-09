@@ -2,6 +2,7 @@ require "version.rb"
 
 # pmd core
 require "pmd/config.rb"
+require "pmd/counter.rb"
 require "pmd/pause.rb"
 require "pmd/reset.rb"
 require "pmd/help.rb"

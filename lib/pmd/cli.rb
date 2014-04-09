@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module PMD
   class CLI
     @@commands = {
@@ -13,8 +15,8 @@ module PMD
 
       :daemon => :d,
       :help => :h,
-      :pause => :p,
-      :stop => :s,
+      :pause => :p, # finished
+      :stop => :s, # 
       :reset => :reset,
     }
 
@@ -24,12 +26,21 @@ module PMD
 
     def execute!
 
+      before
       command_class = subcommand
       command_class.new().execute!
 
     end
 
     private
+    def before
+
+      if not File.directory? Config.base_dir
+        FileUtils.mkdir_p Config.base_dir
+      end
+
+    end
+
     def subcommand
 
       if not @argv.length > 0
