@@ -9,6 +9,7 @@ module PMD
     def execute!
 
       # create a stop file
+      puts "HELLO FROM STOP"
 
     end
 
