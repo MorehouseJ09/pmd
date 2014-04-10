@@ -9,6 +9,10 @@ module PMD
       return @@base_dir
     end
 
+    def self.stop_path
+      return File.join @@base_dir, "stop"
+    end
+
     def self.pause_path
       return File.join @@base_dir, "pause"
     end
@@ -21,6 +25,22 @@ module PMD
       return File.join @@base_dir, "counter"
     end
 
-  end
+    # return seconds needed for pomodoro
+    def self.pomodoro_length
+      value = 25
+      if ENV.key "POMODORO_LENGTH"
+        value = ENV["POMODORO_LENGTH"].to_i
+      end
+      return value * 60
+    end
+    
+    def self.break_length
+      value = 3
+      if ENV.key "POMODORO_BREAK_LENGTH"
+        value = ENV["POMODORO_BREAK_LENGTH"].to_i
+      end
+      return value * 60
+    end
 
+  end
 end

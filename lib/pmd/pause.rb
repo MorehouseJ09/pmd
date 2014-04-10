@@ -6,13 +6,12 @@ module PMD
 
     end
 
-    def self.isPaused
+    def self.is_paused
       
       if File.exists? Config.pause_path
         return true
       end
       return false
-
     end
 
     def execute!

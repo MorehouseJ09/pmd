@@ -7,7 +7,8 @@ module PMD
       daemon: Daemon, #default as well
       help: Help, # help
       pause: Pause, # pause 
-      restart: Restart # restart
+      restart: Restart, # restart
+      stop: Stop, 
     }
 
     @@aliases = {
