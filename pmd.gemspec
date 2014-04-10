@@ -2,11 +2,11 @@
 lib = File.expand_path "./lib" 
 $:.unshift lib unless $:.include?(lib)
 
-require 'backlog'
+require 'pmd'
 
 Gem::Specification.new do |s|
   s.name        = "pmd"
-  s.version     = Backlog::VERSION
+  s.version     = PMD::VERSION
   s.licenses    = ['MIT']
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jon Morehouse"]
