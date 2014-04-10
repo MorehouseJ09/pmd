@@ -27,7 +27,7 @@ module PMD
 
     # return seconds needed for pomodoro
     def self.pomodoro_length
-      value = 1 
+      value = 25
       if ENV.key "POMODORO_LENGTH"
         value = ENV["POMODORO_LENGTH"].to_i
       end

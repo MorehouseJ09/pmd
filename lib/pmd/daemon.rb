@@ -1,4 +1,3 @@
-framework 'Cocoa'
 require 'date'
 
 module PMD
@@ -119,6 +118,11 @@ module PMD
   end
 
   class Daemon
+    def initialize
+      # load up cocoa here instead of as a parent - to avoid weird error each time we run!
+      framework 'Cocoa'
+    end
+
     def execute!
       app = NSApplication.sharedApplication
       app.delegate = MyAppDelegate.new
