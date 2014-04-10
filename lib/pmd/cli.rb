@@ -5,10 +5,9 @@ module PMD
     @@commands = {
 
       daemon: Daemon, #default as well
-      help: Help,
+      help: Help, # help
       pause: Pause, # pause 
-      stop: Stop,
-      reset: Reset, # resets the file counter
+      restart: Restart # restart
     }
 
     @@aliases = {
@@ -16,8 +15,7 @@ module PMD
       :daemon => :d,
       :help => :h,
       :pause => :p, # finished
-      :stop => :s, # 
-      :reset => :reset,
+      :restart => :restart,
     }
 
     def initialize(argv, stdin=STDIN, stdout=STDOUT, stderr=STDERR, kernel=Kernel)

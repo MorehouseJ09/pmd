@@ -9,20 +9,16 @@ module PMD
       return @@base_dir
     end
 
-    def self.stop_path
-
-      return File.join @@base_dir, "stop"
-    end
-
     def self.pause_path
-
       return File.join @@base_dir, "pause"
     end
 
+    def self.restart_path
+      return File.join @@base_dir, "restart"
+    end
+
     def self.counter_path
-
       return File.join @@base_dir, "counter"
-
     end
 
   end
