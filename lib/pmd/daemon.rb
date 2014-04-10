@@ -1,4 +1,5 @@
 require 'date'
+require 'fileutils'
 
 module PMD
 
@@ -134,6 +135,12 @@ module PMD
     def initialize
       # load up cocoa here instead of as a parent - to avoid weird error each time we run!
       framework 'Cocoa'
+      # remove any files from previous runner
+      [Config.stop_path, Config.restart_path, Config.pause_path].each do |file|
+        if File.exists? file
+          FileUtils.rm file
+        end
+      end
     end
 
     def execute!

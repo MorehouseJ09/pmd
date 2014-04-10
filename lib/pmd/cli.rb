@@ -64,7 +64,7 @@ module PMD
           end
         end
 
-        if keyword == key or aliases and aliases.include? keyword 
+        if keyword == key or (aliases and aliases.include?(keyword))
           return command_class
         end
       end
