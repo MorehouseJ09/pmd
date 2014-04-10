@@ -93,7 +93,7 @@ module PMD
       # determine the amount of difference between end_time and now
       difference = @end_time - Time.now
       if difference > 0
-        @item.title = difference_to_formatted_string difference
+        @item.title = title_string difference
       else 
         restart
       end
@@ -106,12 +106,25 @@ module PMD
         start Config.pomodoro_length
       else
         @break = true
+        Counter.new().increase
         start Config.break_length
       end
     end
 
+    def title_string difference
+        value = Counter.new().value
+        time_string = difference_to_formatted_string difference
+        if value > 0 and not @break
+          @item.title = "#{Counter.new().value} #{time_string}"
+        elsif @break
+          @item.title = "B #{time_string}"
+        else
+          @item.title = time_string
+        end
+    end
+
     def difference_to_formatted_string difference
-      minutes = (difference / 60).floor.to_s.rjust 2, "0"
+      minutes = (difference / 60).floor.to_s
       seconds = (difference % 60).floor.to_s.rjust 2, "0"
       return "#{minutes}:#{seconds}"
     end
