@@ -11,6 +11,8 @@ module PMD
       stop: Stop, 
     }
 
+    @@default = Daemon
+
     @@aliases = {
 
       :daemon => :d,
@@ -43,7 +45,7 @@ module PMD
     def subcommand
 
       if not @argv.length > 0
-        return Help
+        return @@default
       end
 
       keyword = @argv[0].to_sym
@@ -67,7 +69,7 @@ module PMD
         end
       end
 
-      return Help
+      return @@default
     end
 
   end
