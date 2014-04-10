@@ -6,15 +6,16 @@ module PMD
   class MyAppDelegate
 
     # declare class variables
-    @item = nil
-    @started = false
-    @end_time = nil
-    @paused = false
-    @break = false
+    def initialize
+      @started = false
+      @end_time = nil
+      @paused = false
+      @break = false
+    end
 
     def applicationDidFinishLaunching(notification)
       menu = NSMenu.new
-      menu.initWithTitle "Test"
+      menu.initWithTitle "Pomodoro"
       statusBar = NSStatusBar.systemStatusBar
       @item = item = statusBar._statusItemWithLength(0, withPriority:2137483647)
       item.length = 0
@@ -58,7 +59,6 @@ module PMD
     def pause_handler
 
       is_paused = Pause.is_paused
-      
       if not @paused == is_paused #change of state
         if is_paused 
           pause
@@ -66,7 +66,21 @@ module PMD
           unpause
         end
       end
+      # will call update if it isn't paused!
+      return @paused
+    end
 
+    def pause
+      @time_remaining = @end_time - Time.now
+      @paused = true
+    end
+
+    def unpause
+      if not @time_remaining
+        return start
+      end
+      @end_time = Time.now + @time_remaining
+      @paused = false
     end
 
     # utilities
@@ -79,13 +93,32 @@ module PMD
     def update
       # determine the amount of difference between end_time and now
       difference = @end_time - Time.now
-      puts difference
+      if difference > 0
+        @item.title = difference_to_formatted_string difference
+      else 
+        restart
+      end
     end
 
+    def restart
+      # handle difference  
+      if @break #currently on break start a normal pomodoro
+        @break = false
+        start Config.pomodoro_length
+      else
+        @break = true
+        start Config.break_length
+      end
+    end
+
+    def difference_to_formatted_string difference
+      minutes = (difference / 60).floor.to_s.rjust 2, "0"
+      seconds = (difference % 60).floor.to_s.rjust 2, "0"
+      return "#{minutes}:#{seconds}"
+    end
   end
 
   class Daemon
-
     def execute!
       app = NSApplication.sharedApplication
       app.delegate = MyAppDelegate.new
