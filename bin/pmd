@@ -1,0 +1,9 @@
+#!/usr/bin/env macruby
+
+lib_dir = File.expand_path File.join File.dirname(__FILE__), "../lib"
+$:.unshift lib_dir
+require 'pmd'
+
+PMD::CLI.new(ARGV.dup).execute!
+
+
